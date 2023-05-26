@@ -1,0 +1,53 @@
+[
+    {
+      "id": 1,
+      "name": "Rudra Padhy",
+      "totalMarks": 95
+    },
+    {
+      "id": 2,
+      "name": "Salin Das",
+      "totalMarks": 85
+    },
+    {
+      "id": 3,
+      "name": "Devi Prasad",
+      "totalMarks": 92
+    },
+    {
+      "id": 4,
+      "name": "Karma Veer",
+      "totalMarks": 78
+    },
+    {
+      "id": 5,
+      "name": "Rajesh das",
+      "totalMarks": 88
+    },
+    {
+      "id": 6,
+      "name": "Rama Rao",
+      "totalMarks": 91
+    },
+    {
+      "id": 7,
+      "name": "Kisan Das",
+      "totalMarks": 82
+    },
+    {
+      "id": 8,
+      "name": "Soumya Ranjan",
+      "totalMarks": 87
+    },
+    {
+      "id": 9,
+      "name": "Ranjit Das",
+      "totalMarks": 79
+    },
+    {
+      "id": 10,
+      "name": "Rabin Das",
+      "totalMarks": 93
+    }
+  ]
+  

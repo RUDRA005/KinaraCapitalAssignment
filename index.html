@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Details</title>
+  <style>
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Student Details</h1>
+
+    <form action="/api/students" method="get">
+      <div class="form-group">
+        <label for="id">ID:</label>
+        <input type="text" id="id" name="id" placeholder="Filter by ID" oninput="filterStudents()">
+      </div>
+
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Filter by Name" oninput="filterStudents()">
+      </div>
+
+      <div class="form-group">
+        <label for="totalMarks">Total Marks:</label>
+        <input type="text" id="totalMarks" name="totalMarks" placeholder="Filter by Total Marks" oninput="filterStudents()">
+      </div>
+
+      <button type="submit">Filter</button>
+    </form>
+
+    <table id="studentTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Total Marks</th>
+        </tr>
+      </thead>
+      <tbody id="studentTableBody"></tbody>
+    </table>
+  </div>
+
+  <script>
+    // Function to fetch and display student data
+    function fetchStudents() {
+      fetch('/api/students')
+        .then(response => response.json())
+        .then(data => {
+          const studentTableBody = document.getElementById('studentTableBody');
+          studentTableBody.innerHTML = '';
+
+          data.data.forEach(student => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td>${student.id}</td>
+              <td>${student.name}</td>
+              <td>${student.totalMarks}</td>
+            `;
+            studentTableBody.appendChild(row);
+          });
+        })
+        .catch(error => console.error(error));
+    }
+
+    // Function to fetch and display filtered student data
+    function filterStudents(event) {
+      event.preventDefault();
+
+      const id = document.getElementById('id').value.trim();
+      const name = document.getElementById('name').value.trim();
+      const totalMarks = document.getElementById('totalMarks').value.trim();
+
+      const queryParams = new URLSearchParams({
+        id,
+        name,
+        totalMarks
+      });
+
+      fetch(`/api/students/filter?${queryParams}`)
+        .then(response => response.json())
+        .then(data => {
+          const studentTableBody = document.getElementById('studentTableBody');
+          studentTableBody.innerHTML = '';
+
+          data.data.forEach(student => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td>${student.id}</td>
+              <td>${student.name}</td>
+              <td>${student.totalMarks}</td>
+            `;
+            studentTableBody.appendChild(row);
+          });
+        })
+        .catch(error => console.error(error));
+    }
+
+    // Fetch all students on page load
+    fetchStudents();
+  </script>
+</body>
+</html>
